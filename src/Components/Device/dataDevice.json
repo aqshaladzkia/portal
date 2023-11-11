@@ -1,0 +1,50 @@
+[
+    {
+      "id": 1,
+      "name": "Smart Fan",
+      "type": "Fan",
+      "mqtt_topic": "home/device/smartfan",
+      "mqtt_messages": [
+        { "name": "Speed 1", "message": "#SPEEDONE" },
+        { "name": "Speed 2", "message": "#SPEEDTWO" },
+        { "name": "Swing ON", "message": "#SWINGON" },
+        { "name": "Swing OFF", "message": "#SWINGOFF" },
+        { "name": "OFF", "message": "#OFF" }
+      ],
+      "status": "-"
+    },
+    {
+      "id": 2,
+      "name": "Moskiller",
+      "type": "Moskiller",
+      "mqtt_topic": "home/device/moskiller",
+      "mqtt_messages": [
+        { "name": "ON", "message": "#ON" },
+        { "name": "OFF", "message": "#OFF" }
+      ],
+      "status": "-"
+    },
+    {
+        "id": 3,
+        "name": "Smart Lamp",
+        "type": "Lamp",
+        "mqtt_topic": "home/device/smartlamp",
+        "mqtt_messages": [
+          { "name": "ON", "message": "#ON" },
+          { "name": "OFF", "message": "#OFF" }
+        ],
+        "status": "-"
+      },
+      {
+        "id": 4,
+        "name": "CCTV",
+        "type": "CCTV",
+        "mqtt_topic": "home/device/cctv",
+        "mqtt_messages": [
+          { "name": "ON", "message": "#ON" },
+          { "name": "OFF", "message": "#OFF" }
+        ],
+        "status": "-"
+      }
+  ]
+  
