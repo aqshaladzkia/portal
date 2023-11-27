@@ -9,12 +9,36 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 
 export default function Dashboard() {
-  const {
-    listening,
-    resetTranscript,
-  } = useSpeechRecognition();
-  const [message, setMessage] = useState('')
+  const [showPopup, setShowPopup] = useState(false);
+  const [commands,setCommands] = useState([])
+  const { listening, resetTranscript } = useSpeechRecognition();
+  const [message, setMessage] = useState("");
+  useEffect(()=>{
+    devicesData.forEach(e => {
+      setCommands(prevCommands => [
+      ...prevCommands,
+      {
+        command: "Hidupkan " + e.name,
+        callback: () => {
+          setMessage(`${e.name} Hidup`);
+          toggleDevice(e.id, true);
+        },
+      },
+      {
+        command: "Matikan " + e.name,
+        callback: () => {
+          setMessage(`${e.name} Mati`);
+          toggleDevice(e.id, false);
+        },
+      }
+    ]);
+    });
+    console.log(commands)
+  },[])
+  useEffect(()=>{
+    console.log(commands)
 
+  },[commands])
   const [devices, setDevices] = useState(
     devicesData.map((device) => ({
       ...device,
@@ -22,62 +46,71 @@ export default function Dashboard() {
       isDeviceOn: false,
     }))
   );
+  const toggleMute = (id, state) => {
+    setDevices(
+      devices.map((device) =>
+        device.id === id ? { ...device, isMuted: state ? id : false } : device
+      )
+    );
+    setShowPopup(id);
+
+    // Menyembunyikan popup setelah 2 detik
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);
+  };
+
+  const toggleDevice = (id, state) => {
+    setDevices(
+      devices.map((device) =>
+        device.id === id
+          ? { ...device, isDeviceOn: state ? id : false }
+          : device
+      )
+    );
+    setShowPopup(id);
+    // Menyembunyikan popup setelah 2 detik
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 3000);
+  };
+
   // const commands = [
   //   {
-  //     command: 'I would like to order *',
-  //     callback: (food) => setMessage(`Your order is for: ${food}`)
+  //     command: "Hidupkan Kipas",
+  //     callback: () => {
+  //       setMessage(`Kipas Hidup`);
+  //       toggleDevice(1, true);
+  //     },
   //   },
   //   {
-  //     command: 'The weather is :condition today',
-  //     callback: (condition) => setMessage(`Today, the weather is ${condition}`)
+  //     command: "Matikan Kipas",
+  //     callback: () => {
+  //       setMessage(`Kipas Hidup`);
+  //       toggleDevice(1, false);
+  //     },
   //   },
   //   {
-  //     command: 'My top sports are * and *',
-  //     callback: (sport1, sport2) => setMessage(`#1: ${sport1}, #2: ${sport2}`)
+  //     command: "The weather is :condition today",
+  //     callback: (condition) => setMessage(`Today, the weather is ${condition}`),
   //   },
-  //   {
-  //     command: 'Pass the salt (please)',
-  //     callback: () => setMessage('My pleasure')
-  //   },
-  //   {
-  //     command: ['Hello', 'Hi'],
-  //     callback: ({ command }) => setMessage(`Hi there! You said: "${command}"`),
-  //     matchInterim: true
-  //   },
-  //   {
-  //     command: 'Beijing',
-  //     callback: (command, spokenPhrase, similarityRatio) => setMessage(`${command} and ${spokenPhrase} are ${similarityRatio * 100}% similar`),
-  //     // If the spokenPhrase is "Benji", the message would be "Beijing and Benji are 40% similar"
-  //     isFuzzyMatch: true,
-  //     fuzzyMatchingThreshold: 0.2
-  //   },
-  //   {
-  //     command: ['eat', 'sleep', 'leave'],
-  //     callback: (command) => setMessage(`Best matching command: ${command}`),
-  //     isFuzzyMatch: true,
-  //     fuzzyMatchingThreshold: 0.2,
-  //     bestMatchOnly: true
-  //   },
-  //   {
-  //     command: 'clear',
-  //     callback: ({ resetTranscript }) => resetTranscript()
-  //   }
-  // ]
+  // ];
 
-  const { transcript, browserSupportsSpeechRecognition } = useSpeechRecognition()
-  const startListening = () => SpeechRecognition.startListening({ continuous: true});
-  useEffect(()=>{
-    console.log(message)
-  },[message])
-  
+  const { transcript, browserSupportsSpeechRecognition } = useSpeechRecognition(
+    { commands }
+  );
+  const startListening = () =>
+    SpeechRecognition.startListening({ continuous: false, language: "id" });
+  useEffect(() => {
+    console.log(transcript);
+  }, [transcript]);
 
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
-  } else {  
+  } else {
     return (
       <div className="mt-5 mx-4 " style={{ paddingTop: "60px" }}>
-
-{/* Settingan untuk gambar di samping */}
+        {/* Settingan untuk gambar di samping */}
         <div className="row">
           <div className="col-md-4 position-relative me-3">
             <div className="mx-5 mt-2 position-absolute">
@@ -90,24 +123,31 @@ export default function Dashboard() {
                 Monitoring device mu sekarang dengan Dashboard kami!
               </p>
             </div>
-            <img src={Hero} className=""  style={{height:550,width:400}}/>
+            <img src={Hero} className="" style={{ height: 550, width: 400 }} />
           </div>
-{/* Settingan untuk grid item */}
+          {/* Settingan untuk grid item */}
           <div className="col">
-            <div className="d-flex justify-content-end p-4" style={{marginRight:30,marginBottom:10}}>
-            <button type="button" className="btn btn-primary">
-              <Link to="#">Add New Device</Link>
-            </button>
+            <div
+              className="d-flex justify-content-end p-4"
+              style={{ marginRight: 30, marginBottom: 10 }}
+            >
+              <button type="button" className="btn btn-primary">
+                <Link to="#">Add New Device</Link>
+              </button>
             </div>
-            <DeviceCard devices={devices} setDevices={setDevices} />
+            <DeviceCard
+              devices={devices}
+              setDevices={setDevices}
+              toggleDevice={toggleDevice}
+              toggleMute={toggleMute}
+              showPopup={showPopup}
+            />
             <button
               className={`position-absolute btn ${
                 listening ? "btn-success" : "btn-danger"
-              } rounded-circle end-0 bottom-0 m-4`}
+              } circle end-0 bottom-0 m-4`}
               onClick={() =>
-                listening
-                  ? SpeechRecognition.stopListening()
-                  : startListening()
+                listening ? SpeechRecognition.stopListening() : startListening()
               }
             >
               {listening ? "ON" : "OFF"}
