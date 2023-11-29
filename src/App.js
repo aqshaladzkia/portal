@@ -9,13 +9,13 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/" element={
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={
           <>
             <div className="position-relative">
               <Navbar />
               <div className="wrapper-content">
-                {/* <Sidebar /> */}
+                <Sidebar />
                 <div className="w-100">
                   <Routes>
                     <Route path="/" element={<Dashboard />} />
