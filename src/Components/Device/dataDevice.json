@@ -45,6 +45,39 @@
           { "name": "OFF", "message": "#OFF" }
         ],
         "status": "-"
+      },
+      {
+        "id": 5,
+        "name": "Smart Humifider",
+        "type": "Humifider",
+        "mqtt_topic": "home/device/humifider",
+        "mqtt_messages": [
+          { "name": "ON", "message": "#ON" },
+          { "name": "OFF", "message": "#OFF" }
+        ],
+        "status": "-"
+      },
+      {
+        "id": 6,
+        "name": "Smart Vacum",
+        "type": "Vakum",
+        "mqtt_topic": "home/device/vacum",
+        "mqtt_messages": [
+          { "name": "ON", "message": "#ON" },
+          { "name": "OFF", "message": "#OFF" }
+        ],
+        "status": "-"
+      },
+      {
+        "id": 7,
+        "name": "Smart Plug",
+        "type": "Colokan",
+        "mqtt_topic": "home/device/plug",
+        "mqtt_messages": [
+          { "name": "ON", "message": "#ON" },
+          { "name": "OFF", "message": "#OFF" }
+        ],
+        "status": "-"
       }
   ]
   
