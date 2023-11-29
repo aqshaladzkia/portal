@@ -4,17 +4,18 @@ import lampIcon from "../../Assets/Icons/lamp.png";
 import fanIcon from "../../Assets/Icons/fan.png";
 import moskillerIcon from "../../Assets/Icons/moskiller.png";
 import cctvIcon from "../../Assets/Icons/cctv.png";
+import plugIcon from "../../Assets/Icons/plug.png";
+import humidifierIcon from "../../Assets/Icons/humidifier.png";
+import vacumIcon from "../../Assets/Icons/vacum.png";
 import "../Device/DeviceCard.css";
 
-const DeviceCard = ({ devices, toggleDevice, toggleMute,showPopup }) => {
-
+const DeviceCard = ({ devices, toggleDevice, toggleMute, showPopup }) => {
   return (
     <div className="row flex-wrap">
-      {
-        devices && 
-        devices.slice(0, 4).map((device) => (
+      {devices &&
+        devices.slice(0, 8).map((device) => (
           <div className="col-md-4 card-device" key={device.id}>
-            <div className="card">
+            <div className="card mt-4">
               <div className="card-body">
                 <div className="d-flex flex-column align-items-start">
                   <div className="d-flex w-100 mb-3">
@@ -29,6 +30,12 @@ const DeviceCard = ({ devices, toggleDevice, toggleMute,showPopup }) => {
                             ? moskillerIcon
                             : device.type === "CCTV"
                             ? cctvIcon
+                            : device.type == "Plug"
+                            ? plugIcon
+                            : device.type == "Humidifier"
+                            ? humidifierIcon
+                            : device.type == "Vacum"
+                            ? vacumIcon
                             : ""
                         }
                         alt="Device Icon"
@@ -43,7 +50,7 @@ const DeviceCard = ({ devices, toggleDevice, toggleMute,showPopup }) => {
                         id="switch"
                         checked={device.isDeviceOn}
                         onChange={() => {
-                          toggleDevice(device.id,!device.isDeviceOn);
+                          toggleDevice(device.id, !device.isDeviceOn);
                         }}
                       />
                     </div>
@@ -56,8 +63,7 @@ const DeviceCard = ({ devices, toggleDevice, toggleMute,showPopup }) => {
                         device.isMuted ? "success" : "danger"
                       }`}
                       onClick={() => {
-                        toggleMute(device.id,!device.isMuted);
-                      
+                        toggleMute(device.id, !device.isMuted);
                       }}
                     >
                       {device.isMuted === device.id ? (
@@ -76,25 +82,23 @@ const DeviceCard = ({ devices, toggleDevice, toggleMute,showPopup }) => {
             </div>
           </div>
         ))}
-        {showPopup && (
-          <div className="popup">
-            <p>
-              Device{" "}
-              {devices.find((device) => showPopup === device.isMuted)
-                ? "Unmuted"
-                : "Muted"}{" "}
-              <strong style={{ fontWeight: "bold" }}>
-                [Status:{" "}
-                {devices.find((device) => showPopup === device.isDeviceOn)
-                  ? "ON"
-                  : "OFF"}
-                ]{" "}
-              </strong>
-            </p>
-          </div>
-        )
-
-      }
+      {showPopup && (
+        <div className="popup">
+          <p>
+            Device{" "}
+            {devices.find((device) => showPopup === device.isMuted)
+              ? "Unmuted"
+              : "Muted"}{" "}
+            <strong style={{ fontWeight: "bold" }}>
+              [Status:{" "}
+              {devices.find((device) => showPopup === device.isDeviceOn)
+                ? "ON"
+                : "OFF"}
+              ]{" "}
+            </strong>
+          </p>
+        </div>
+      )}
     </div>
   );
 };
