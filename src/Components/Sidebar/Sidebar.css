@@ -54,8 +54,6 @@ a:focus {
     display: flex;
     align-items: stretch;
     /* height: 100vh; background: #fff;  */
-    min-width: 250px;
-    max-width: 250px;
 
 }
 .wrapper-content {
@@ -66,8 +64,6 @@ a:focus {
 }
 
 #sidebar {
-    min-width: 250px;
-    max-width: 250px;
     background: #fff;
     color: #AAAAAA;
     transition: all 0.3s;
@@ -99,7 +95,6 @@ a:focus {
     font-size: 16px;
     display: block;
     padding-bottom: 14px;
-    padding-left: 20px;
 }
 
 #sidebar ul li a:hover {
@@ -134,9 +129,7 @@ ul ul a {
 .CTAs{
     margin-top: 80px;
 }
-ul.CTAs {
-    padding: 20px;
-}
+
 
 ul.CTAs a {
     text-align: center;

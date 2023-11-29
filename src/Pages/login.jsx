@@ -1,8 +1,10 @@
 import React from "react";
 import Image from '../Assets/Image/Logo.png'
+import { Link } from "react-router-dom";
 
 
 export default function Login() {
+ 
   return (
     <div>
       <section className="vh-100" style={{backgroundColor: "#FEFEFE"}}>
@@ -68,13 +70,13 @@ export default function Login() {
                         </div>
 
                         <div className="pt-1 mb-4">
-                          <button
+                          <Link
+                          to={'/dashboard'}
                             className="btn btn-lg btn-block"
-                            type="button"
                             style={{backgroundColor:"#35bba2",color:"#fff",fontSize:"18px",fontWeight:"500"}}
                           >
                             Masuk
-                          </button>
+                          </Link>
                         </div>
 
                         <a className="small text-muted" href="#!">
