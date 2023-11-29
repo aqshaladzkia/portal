@@ -28,9 +28,9 @@
   }
 
   .card-device {
-    width: 353px;
-    margin-right: 10px; 
-    margin-bottom: 15px;/* Atur jarak bawah antara card-device */
+    width: 25%;
+    /* margin-right: 10px; 
+    margin-bottom: 15px;Atur jarak bawah antara card-device */
   }
 
   

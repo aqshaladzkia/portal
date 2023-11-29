@@ -13,7 +13,7 @@ const DeviceCard = ({ devices, toggleDevice, toggleMute,showPopup }) => {
       {
         devices && 
         devices.slice(0, 4).map((device) => (
-          <div className="col-md-5 card-device" key={device.id}>
+          <div className="col-md-4 card-device" key={device.id}>
             <div className="card">
               <div className="card-body">
                 <div className="d-flex flex-column align-items-start">

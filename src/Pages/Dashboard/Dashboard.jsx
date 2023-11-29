@@ -112,7 +112,7 @@ export default function Dashboard() {
       <div className="mt-5 mx-4 " style={{ paddingTop: "60px" }}>
         {/* Settingan untuk gambar di samping */}
         <div className="row">
-          <div className="col-md-4 position-relative me-3">
+          {/* <div className="col-md-4 position-relative me-3">
             <div className="mx-5 mt-2 position-absolute">
               <p style={{ fontSize: "25px", fontWeight: "500" }}>Hello!</p>
               <h3 style={{ fontSize: "49px", fontWeight: "700" }}>User</h3>
@@ -124,12 +124,12 @@ export default function Dashboard() {
               </p>
             </div>
             <img src={Hero} className="" style={{ height: 550, width: 400 }} />
-          </div>
+          </div> */}
           {/* Settingan untuk grid item */}
           <div className="col">
             <div
-              className="d-flex justify-content-end p-4"
-              style={{ marginRight: 30, marginBottom: 10 }}
+              className="d-flex justify-content-end mb-4"
+              style={{marginBottom: 10 }}
             >
               <button type="button" className="btn btn-primary">
                 <Link to="#">Add New Device</Link>

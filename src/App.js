@@ -15,7 +15,7 @@ function App() {
             <div className="position-relative">
               <Navbar />
               <div className="wrapper-content">
-                <Sidebar />
+                {/* <Sidebar /> */}
                 <div className="w-100">
                   <Routes>
                     <Route path="/" element={<Dashboard />} />
