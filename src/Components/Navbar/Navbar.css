@@ -6,12 +6,13 @@
     position: relative;
     margin-bottom: 1000px;
 }
-.navbar{
+.navbar-baru{
+    padding-top: 10px;
     display: block;
    position: fixed !important;
    z-index: 1000;
     width: 100%;
     height: 80px;
-    border-bottom: 1px solid #DEDEDE;
+    border-bottom: 0.5px solid #DEDEDE;
 
 }

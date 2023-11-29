@@ -127,14 +127,14 @@ export default function Dashboard() {
           </div> */}
           {/* Settingan untuk grid item */}
           <div className="col">
-            <div
+            {/* <div
               className="d-flex justify-content-end mb-4"
               style={{marginBottom: 10 }}
             >
               <button type="button" className="btn btn-primary">
                 <Link to="#">Add New Device</Link>
               </button>
-            </div>
+            </div> */}
             <DeviceCard
               devices={devices}
               setDevices={setDevices}
