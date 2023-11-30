@@ -13,11 +13,11 @@ import SpeechRecognition, {
 export default function Dashboard() {
   const [showPopup, setShowPopup] = useState(false);
   const [commands, setCommands] = useState([])
-  const { listening, resetTranscript } = useSpeechRecognition();
+  const { listening, resetTranscript, transcript } = useSpeechRecognition();
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    // console.log(commands)
+    console.log(commands)
 
   }, [commands])
   const [devices, setDevices] = useState([]);
@@ -78,28 +78,7 @@ export default function Dashboard() {
     }, 3000);
   };
 
-  // const commands = [
-  //   {
-  //     command: "Hidupkan Kipas",
-  //     callback: () => {
-  //       setMessage(`Kipas Hidup`);
-  //       toggleDevice(1, true);
-  //     },
-  //   },
-  //   {
-  //     command: "Matikan Kipas",
-  //     callback: () => {
-  //       setMessage(`Kipas Hidup`);
-  //       toggleDevice(1, false);
-  //     },
-  //   },
-  //   {
-  //     command: "The weather is :condition today",
-  //     callback: (condition) => setMessage(`Today, the weather is ${condition}`),
-  //   },
-  // ];
-
-  const { transcript, browserSupportsSpeechRecognition } = useSpeechRecognition(
+  const { browserSupportsSpeechRecognition } = useSpeechRecognition(
     { commands }
   );
   const startListening = () =>
@@ -108,36 +87,18 @@ export default function Dashboard() {
   }, [transcript]);
 
   if (!browserSupportsSpeechRecognition) {
-    return <span>Browser doesn't support speech recognition.</span>;
+    return <span>Browser tidak mendukung pengenalan suara.</span>;
   } else {
     return (
       <div className="mt-5 mx-4 " style={{ paddingTop: "60px" }}>
+        {/* Tambahkan kotak untuk menampilkan transkrip suara pengguna */}
+       
+
         {/* Settingan untuk gambar di samping */}
         <div className="row">
 
-          {/* <div className="col-md-4 position-relative me-3">
-            <div className="mx-5 mt-2 position-absolute">
-              <p style={{ fontSize: "25px", fontWeight: "500" }}>Hello!</p>
-              <h3 style={{ fontSize: "49px", fontWeight: "700" }}>User</h3>
-              <p
-                className="mt-3"
-                style={{ fontSize: "16px", fontWeight: "400" }}
-              >
-                Monitoring device mu sekarang dengan Dashboard kami!
-              </p>
-            </div>
-            <img src={Hero} className="" style={{ height: 550, width: 400 }} />
-          </div> */}
           {/* Settingan untuk grid item */}
           <div className="col">
-            {/* <div
-              className="d-flex justify-content-end mb-4"
-              style={{marginBottom: 10 }}
-            >
-              <button type="button" className="btn btn-primary">
-                <Link to="#">Add New Device</Link>
-              </button>
-            </div> */}
             <DeviceCard
               devices={devices}
               setDevices={setDevices}
@@ -161,6 +122,9 @@ export default function Dashboard() {
               />}
             </button>
           </div>
+        </div>
+        <div className="p-3 border" style={{width:'45%',marginTop:'70px'}}>
+          {transcript || "Mulai berbicara..."}
         </div>
       </div>
     );
